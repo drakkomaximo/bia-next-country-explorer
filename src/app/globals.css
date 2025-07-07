@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: hsl(0, 0%, 98%);
+  --color-card: hsl(0, 0%, 100%);
+  --color-text: hsl(200, 15%, 8%);
+  --color-input: hsl(0, 0%, 100%);
+  --color-placeholder: hsl(0, 0%, 52%);
+  --color-shadow: 0 2px 8px 0 rgba(0,0,0,0.05);
+  --font-family-nunito-sans: var(--font-nunito-sans), sans-serif;
+  --max-width-desktop: 1440px;
+  --color-scheme: light dark;
+}
+
+@layer theme {
+  .dark {
+    --color-bg: hsl(207, 26%, 17%);
+    --color-card: hsl(209, 23%, 22%);
+    --color-text: hsl(0, 0%, 100%);
+    --color-input: hsl(209, 23%, 22%);
+    --color-placeholder: hsl(0, 0%, 100%);
+  }
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-nunito-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+input::placeholder, select::placeholder {
+  color: var(--color-placeholder);
+  opacity: 1;
+}
+
+body,
+nav,
+input,
+select,
+.card,
+button,
+a,
+div,
+h1, h2, h3, h4, h5, h6 {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+}
