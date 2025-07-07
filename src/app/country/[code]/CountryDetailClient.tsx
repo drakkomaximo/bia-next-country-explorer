@@ -73,7 +73,7 @@ export default function CountryDetailClient({ code }: { code: string }) {
               </div>
               <div>
                 <p className="mb-2"><span className="font-semibold">{content.countryDetail.topLevelDomain}</span> {country.tld?.[0]}</p>
-                <p className="mb-2"><span className="font-semibold">{content.countryDetail.currencies}</span> {country.currencies ? Object.values(country.currencies).map((c) => (c as { name: string }).name).join(', ') : 'N/A'}</p>
+                <p className="mb-2"><span className="font-semibold">{content.countryDetail.currencies}</span> {country.currencies ? Object.values(country.currencies).map((c: { name: string }) => c.name).join(', ') : 'N/A'}</p>
                 <p className="mb-2"><span className="font-semibold">{content.countryDetail.languages}</span> {country.languages ? Object.values(country.languages).join(', ') : 'N/A'}</p>
               </div>
             </div>

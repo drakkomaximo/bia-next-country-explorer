@@ -12,13 +12,13 @@ export default function NoData({ onReset }: { onReset?: () => void }) {
         {onReset ? (
           <button
             onClick={onReset}
-            className="inline-block px-6 py-2 rounded font-nunito-sans text-base font-semibold transition-all"
+            className="inline-block px-6 py-2 rounded font-nunito-sans text-base font-semibold transition-all cursor-pointer"
             style={{ background: 'var(--color-input)', color: 'var(--color-text)', boxShadow: 'var(--color-shadow)' }}
           >
             {content.noData.clearFilters}
           </button>
         ) : (
-          <Link href="/" className="inline-block px-6 py-2 rounded font-nunito-sans text-base font-semibold transition-all" style={{ background: 'var(--color-input)', color: 'var(--color-text)', boxShadow: 'var(--color-shadow)' }}>
+          <Link href="/" className="inline-block px-6 py-2 rounded font-nunito-sans text-base font-semibold transition-all cursor-pointer" style={{ background: 'var(--color-input)', color: 'var(--color-text)', boxShadow: 'var(--color-shadow)' }}>
             {content.noData.goHome}
           </Link>
         )}

@@ -102,11 +102,71 @@ pnpm run dev
 4. If you use environment variables, add them in the Vercel dashboard.
 5. Deploy and access your app at the provided Vercel URL.
 
+## 🧪 Testing
+
+The project includes comprehensive test coverage for components, hooks, and API services using Jest and React Testing Library.
+
+### Test Structure
+
+```
+src/
+├── components/
+│   └── __tests__/
+│       ├── CountryCard.test.tsx
+│       ├── SearchBar.test.tsx
+│       └── RegionFilter.test.tsx
+├── hooks/
+│   └── __tests__/
+│       ├── useCountries.test.ts
+│       └── useCountryDetail.test.ts
+└── app/
+    └── __tests__/
+        └── page.test.tsx
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
+```
+
+### Test Coverage
+
+- **Components**: CountryCard, SearchBar, RegionFilter
+- **Hooks**: useCountries, useCountryDetail  
+- **Pages**: Main page integration tests
+- **API Services**: Mocked API calls and error handling
+
+### Testing Setup
+
+The project uses:
+- **Jest** as the test runner
+- **React Testing Library** for component testing
+- **@testing-library/jest-dom** for custom matchers
+- **@testing-library/user-event** for user interactions
+- **MSW (Mock Service Worker)** for API mocking
+
+### Key Testing Features
+
+- **Mocked API responses** for consistent testing
+- **Theme provider context** for dark/light mode testing
+- **URL persistence testing** for search and filter functionality
+- **Error state handling** and loading states
+- **Accessibility testing** with proper ARIA attributes
+
 ## 📝 Final Notes & Recommendations
 - All UI texts are centralized in `src/lib/content.ts` for easy translation and maintenance.
 - Scrollbars are visually hidden globally but remain fully functional.
 - The app is accessible, SEO-friendly, and responsive.
 - You can easily customize colors, texts, and structure.
+- Comprehensive test coverage ensures code reliability and maintainability.
 
 ---
 
