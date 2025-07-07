@@ -10,7 +10,6 @@ interface RegionFilterProps {
 
 export default function RegionFilter({ value, onChange }: RegionFilterProps) {
   const [regions, setRegions] = useState<string[]>([]);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetchRegions().then((regions) => setRegions(regions as string[]));
@@ -23,11 +22,10 @@ export default function RegionFilter({ value, onChange }: RegionFilterProps) {
         style={{ background: 'var(--color-input)', color: 'var(--color-text)', boxShadow: 'var(--color-shadow)' }}
         value={value}
         onChange={e => onChange(e.target.value)}
-        onClick={() => setOpen(true)}
       >
         <option value="">{content.regionFilter.placeholder}</option>
         {regions.map(region => (
-          <option key={region} value={region} onClick={() => setOpen(false)}>{region}</option>
+          <option key={region} value={region}>{region}</option>
         ))}
       </select>
       <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" />

@@ -2,8 +2,20 @@ import { useEffect, useState } from 'react';
 import { fetchAllCountries } from '@/services/countriesApi';
 import content from '@/lib/content';
 
+interface Country {
+  name: {
+    common: string;
+    nativeName?: Record<string, { common: string }>;
+  };
+  flags: { svg: string };
+  population: number;
+  region: string;
+  capital: string[];
+  cca3: string;
+}
+
 export function useCountries() {
-  const [countries, setCountries] = useState<any[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

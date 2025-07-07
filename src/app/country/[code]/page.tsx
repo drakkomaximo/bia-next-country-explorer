@@ -2,7 +2,23 @@ import CountryDetailClient from './CountryDetailClient';
 import type { Metadata } from 'next';
 import { fetchCountryByCode } from '@/services/countriesApi';
 
-function getNativeName(country: any) {
+interface Country {
+  name?: {
+    common?: string;
+    nativeName?: Record<string, { common: string }>;
+  };
+  flags?: { svg?: string };
+  population?: number;
+  region?: string;
+  subregion?: string;
+  capital?: string[];
+  tld?: string[];
+  currencies?: Record<string, { name: string }>;
+  languages?: Record<string, string>;
+  borders?: string[];
+}
+
+function getNativeName(country: Country) {
   if (!country || !country.name || !country.name.nativeName) return country?.name?.common || '';
   const nativeNames = Object.values(country.name.nativeName).filter(Boolean);
   for (const n of nativeNames) {
@@ -13,10 +29,10 @@ function getNativeName(country: any) {
   return country.name?.common || '';
 }
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const resolvedParams = await params;
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   try {
-    const country = await fetchCountryByCode(resolvedParams.code);
+    const { code } = await params;
+    const country = await fetchCountryByCode(code);
     if (!country || !country.name) {
       return {
         title: 'Country Not Found',
@@ -25,10 +41,10 @@ export async function generateMetadata({ params }: { params: { code: string } })
     }
     const nativeName = getNativeName(country);
     return {
-      title: `${country.name.common}${nativeName && nativeName !== country.name.common ? ` (${nativeName})` : ''} | ${params.code}`,
+      title: `${country.name.common}${nativeName && nativeName !== country.name.common ? ` (${nativeName})` : ''} | ${code}`,
       description: `Details and information about ${country.name.common}${nativeName && nativeName !== country.name.common ? ` (${nativeName})` : ''}.`,
     };
-  } catch (e) {
+  } catch {
     return {
       title: 'Country Not Found',
       description: 'No country data available.'
@@ -36,7 +52,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
   }
 }
 
-export default async function CountryDetailPage({ params }: { params: { code: string } }) {
-  const resolvedParams = await params;
-  return <CountryDetailClient code={resolvedParams.code} />;
+export default async function CountryDetailPage({ params }: { params: Promise<{ code: string }> }) {
+  const { code } = await params;
+  return <CountryDetailClient code={code || ''} />;
 } 

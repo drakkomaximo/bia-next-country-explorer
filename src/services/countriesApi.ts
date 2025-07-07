@@ -13,13 +13,13 @@ export async function fetchCountryByCode(code: string) {
     const res = await axios.get(`${BASE_URL}/alpha/${code}`);
     if (!res.data || !Array.isArray(res.data) || res.data.length === 0) return null;
     return res.data[0];
-  } catch (e) {
+  } catch {
     return null;
   }
 }
 
 export async function fetchRegions() {
   const res = await axios.get(`${BASE_URL}/all?fields=region`);
-  const regions = res.data.map((c: any) => c.region).filter(Boolean);
+  const regions = res.data.map((c: { region: string }) => c.region).filter(Boolean);
   return Array.from(new Set(regions)).sort();
 } 

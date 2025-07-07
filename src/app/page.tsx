@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import Navigation from '@/components/Navigation'
 import CountryCard from '@/components/CountryCard'
 import SearchBar from '@/components/SearchBar'
@@ -25,7 +25,7 @@ interface Country {
 const BATCH_SIZE = 12;
 const DEBOUNCE_MS = 300;
 
-export default function Home() {
+function HomeContent() {
   const { countries, loading, error } = useCountries();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -147,5 +147,30 @@ export default function Home() {
 
       <BackToTop />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen" style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>
+        <Navigation />
+        <div className="max-w-desktop mx-auto px-4 md:px-16 py-6">
+          <div className="flex flex-col md:flex-row md:justify-between gap-4">
+            <SearchBar value="" onChange={() => {}} />
+            <RegionFilter value="" onChange={() => {}} />
+          </div>
+        </div>
+        <div className="max-w-desktop mx-auto px-4 md:px-16 pb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <CountryCardSkeleton key={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   );
 }

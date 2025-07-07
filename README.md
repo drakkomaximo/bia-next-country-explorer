@@ -1,4 +1,4 @@
-# Theme Switcher App
+# Country Explorer
 
 A professional Next.js application to explore countries of the world, featuring search, region filter, infinite scroll, country detail, dark/light mode, accessibility, and centralized content.
 
@@ -82,15 +82,15 @@ src/
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd theme-switcher-app
+cd bia-next-country-explorer
 ```
 2. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 3. Start the development server:
 ```bash
-npm run dev
+pnpm run dev
 ```
 4. Open [http://localhost:3000](http://localhost:3000)
 
